@@ -1,12 +1,19 @@
 #!/bin/bash
 
+input="$1"
+shift
+
+sample="$1"
+shift
+
 rename 's/\s/_/g' ./*.c
 
 for file in "$@"; do
+        echo "$file"
         filename=$(basename -- "$file")
         extension="${filename##*.}"
         filename="${filename%.*}"
         g++ -o $filename $file
-        ./$filename < ./input.txt > $filename.txt
-        kompare $filename.txt sample_output.txt
+        ./$filename < $input > $filename.txt
+        kompare $filename.txt $sample
 done
