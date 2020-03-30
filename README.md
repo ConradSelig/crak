@@ -1,7 +1,7 @@
 # Description
 
 crak is a unix utility for **c**ompiling, **r**unning, **a**nd **k**omparing the outputs of multiple .c programs in the same directory.
-The inteded use of this script is for grading multiple students programs, and should make grading many files as fast as the crack of a whip!
+The intended use of this script is for grading multiple students programs, and should make grading many files as fast as the crack of a whip!
 
 # Installation
 
