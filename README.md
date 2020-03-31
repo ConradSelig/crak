@@ -15,7 +15,7 @@ The intended use of this script is for grading multiple students programs, and s
 
 # Usage
 
-1. Save all of you .c files in a single directory. You will also need two txt files, an input file and a sample output file. **make
+1. Save all of you .c files in a single directory. You will also need two txt files, an input file and a sample output file. **Make
 sure to remove all whitespace from file names**, you can do this by running `rename 's/\s/_/g' ./*.c`.
 
 2. Run the following command `crak [input txt] [sample output txt] [file(s)]`
