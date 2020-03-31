@@ -6,8 +6,6 @@ shift
 sample="$1"
 shift
 
-rename 's/\s/_/g' ./*.c
-
 for file in "$@"; do
         filename=$(basename -- "$file")
         extension="${filename##*.}"
