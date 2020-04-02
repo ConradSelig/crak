@@ -33,7 +33,7 @@ Note that the next .c file will not be processed until the kompare window is clo
 ## Options
 **-f**
 
-Check for AStyle formatting. This is done by creating a copy of each given .c file (reformatted as .formatted) and running a diff against the original .c file and the new .formatted file. The diff operation ignores all whitespace differences. If a difference is found the name of the .c file is output, if there is no difference nothing is output. Formatting will be checked for all given files, and is done after all other operations.
+Check for AStyle formatting. This is done by creating a copy of each given .c file (reformatted as .formatted) and running a diff against the original .c file and the new .formatted file. The diff operation ignores all whitespace differences. If a difference is found the name of the .c file is output, if there is no difference nothing is output. Formatting will be checked for all given files, and is done after all other operations. This is a much more forgiving option than -F, and is recommended for most cases.
 
 **-F**
 
