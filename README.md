@@ -15,8 +15,9 @@ The intended use of this script is for grading multiple students programs, and s
 
 # Usage
 
-1. Save all of you .c files in a single directory. You will also need two txt files, an input file and a sample output file. **Make
-sure to remove all whitespace from file names**, you can do this by running `rename 's/\s/_/g' ./*.c`.
+`crak [-fF] input[.txt] output[.txt] [file(s) ...]`
+
+1. Save all of you .c files in a single directory. You will also need two txt files, an input file and a sample output file. **Make sure to remove all whitespace from file names**, you can do this by running `rename 's/\s/_/g' ./*.c`.
 
 2. Run the following command `crak [input txt] [sample output txt] [file(s)]`
 
@@ -28,3 +29,12 @@ that will kompare the most recently run program with the sample output given.
 
 Note that the next .c file will not be processed until the kompare window is closed, and aborting the script early will prevent all
 .c files from being processed.
+
+## Options
+**-f**
+
+Check for AStyle formatting. This is done by creating a copy of each given .c file (reformatted as .formatted) and running a diff against the original .c file and the new .formatted file. The diff operation ignores all whitespace differences. If a difference is found the name of the .c file is output, if there is no difference nothing is output. Formatting will be checked for all given files, and is done after all other operations.
+
+**-F**
+
+Check for AStyle formatting. This is done by creating a copy of each given .c file (reformatted as .formatted) and running a diff against the original .c file and the new .formatted file. If a difference is found the name of the .c file is output, if there is no difference nothing is output. Formatting will be checked for all given files, and is done after all other operations.
