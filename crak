@@ -27,7 +27,7 @@ done
 if [[ $check_format -eq 1 ]]; then
     echo ""
     echo ""
-    echo "List of students who did not use Astyle:"
+    echo "List of students who did not use AStyle:"
     
     for file in "$@"; do
             filename=$(basename -- "$file")
