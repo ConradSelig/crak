@@ -1,9 +1,14 @@
 #!/bin/bash
 
-while getopts "f" opt
+check_format=0
+soft_check=0
+hard_check=0
+
+while getopts "fF" opt
 do
         case $opt in
-                (f) check_format=0 ; check_format=1 ;;
+                (f) check_format=1 ; soft_check=1 ;;
+                (F) check_format=1 ; hard_check=1 ;;
                 (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
         esac
         shift
@@ -27,14 +32,18 @@ done
 if [[ $check_format -eq 1 ]]; then
     echo ""
     echo ""
-    echo "List of students who did not use AStyle:"
+    echo "List of students who did not use Astyle:"
     
     for file in "$@"; do
             filename=$(basename -- "$file")
             extension="${filename##*.}"
             filename="${filename%.*}"
             astyle < $file > $filename.formatted
-            DIFF=$(diff -b $file $filename.formatted)
+            if [[ $soft_check -eq 1 ]]; then
+                DIFF=$(diff -b $file $filename.formatted)
+            elif [[ $hard_check -eq 1 ]]; then
+                DIFF=$(diff $file $filename.formatted)
+            fi
             if [ "$DIFF" != "" ]
             then
                     echo $filename
