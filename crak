@@ -1,5 +1,14 @@
 #!/bin/bash
 
+while getopts "f" opt
+do
+        case $opt in
+                (f) check_format=0 ; check_format=1 ;;
+                (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
+        esac
+        shift
+done
+
 input="$1"
 shift
 
@@ -14,3 +23,22 @@ for file in "$@"; do
         ./$filename < $input > $filename.txt
         kompare $filename.txt $sample
 done
+
+if [[ $check_format -eq 1 ]]; then
+    echo ""
+    echo ""
+    echo "List of students who did not use Astyle:"
+    
+    for file in "$@"; do
+            filename=$(basename -- "$file")
+            extension="${filename##*.}"
+            filename="${filename%.*}"
+            astyle < $file > $filename.formatted
+            DIFF=$(diff -b $file $filename.formatted)
+            if [ "$DIFF" != "" ]
+            then
+                    echo $filename
+            fi
+    done
+fi
+
