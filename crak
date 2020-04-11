@@ -14,19 +14,43 @@ do
         shift
 done
 
-input="$1"
-shift
-
-sample="$1"
-shift
+# for all files not .in or .out
+    # filename=$(basename -- "$file")
+    # filename="${filename%.*}"
+    # g++ -o $filename $file
+    # i = 0
+    # for all files of type .in
+        # i=$(( i + 1 ))
+        #./$filename < $infile > $i.tmp_out
+    # cat *.tmp_out > $filename.out
+    # kompare $filename.out $sample
 
 for file in "$@"; do
+    if [[ $file == *.out ]]; then
+        sample=$file
+    fi
+done
+
+echo
+echo "Processing Files..."
+
+for file in "$@"; do
+    if [[ $file != *.out ]] && [[ $file != *.in ]]; then
+        echo $file
         filename=$(basename -- "$file")
-        extension="${filename##*.}"
         filename="${filename%.*}"
         g++ -o $filename $file
-        ./$filename < $input > $filename.txt
-        kompare $filename.txt $sample
+        i=0
+        for in_file in "$@"; do
+            if [[ $in_file == *.in ]]; then
+                i=$(( i + 1 ))
+                ./$filename < $in_file > $i.tmp_out
+            fi
+        done
+        cat *.tmp_out > $filename.out
+        rm *.tmp_out
+        kompare $filename.out sample.out
+    fi
 done
 
 if [[ $check_format -eq 1 ]]; then
@@ -35,6 +59,7 @@ if [[ $check_format -eq 1 ]]; then
     echo "List of students who did not use Astyle:"
     
     for file in "$@"; do
+        if [[ $file != *.out ]] && [[ $file != *.in ]]; then
             filename=$(basename -- "$file")
             extension="${filename##*.}"
             filename="${filename%.*}"
@@ -46,8 +71,9 @@ if [[ $check_format -eq 1 ]]; then
             fi
             if [ "$DIFF" != "" ]
             then
-                    echo $filename
+                echo $filename
             fi
+        fi
     done
 fi
 
