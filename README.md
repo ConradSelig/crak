@@ -15,11 +15,17 @@ The intended use of this script is for grading multiple students programs, and s
 
 # Usage
 
-`crak [-fF] input[.txt] output[.txt] [file(s) ...]`
+`crak [-fF] input[.in] sample_output[.out] [file(s) ...]`
 
-1. Save all of you .c files in a single directory. You will also need two txt files, an input file and a sample output file. **Make sure to remove all whitespace from file names**, you can do this by running `rename 's/\s/_/g' ./*.c`.
+1. Save all of you .c files in a single directory. You will also need multiple txt files with your test cases, you can use as many .in files as you would like, and a single output_file. **Make sure to remove all whitespace from file names**, you can do this by running `rename 's/\s/_/g' ./*.c`.
 
-2. Run the following command `crak [input txt] [sample output txt] [file(s)]`
+All input files will be run through each code file before running any kompare operations. After input all test cases, outputs will be combined into a single file. This single file is what will be kompared to the given sample_output.out file.
+
+**Make sure to actually use the file extensions .in and .out**
+
+_Support for multiple .out files is planned, in the meantime you can combine your own sample_outputs with `cat *.out > sample_output.out`_
+
+2. Run the following command `crak [args] [input] [sample output] [code file(s)]`
 
 I recommend using `*.c` as your files option, as this will run through all of the .c files in your current directory.
 
